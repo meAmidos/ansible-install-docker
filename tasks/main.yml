@@ -1,0 +1,72 @@
+---
+
+- name: Fail if not a new release of Ubuntu
+  fail:
+    msg: "{{ ansible_distribution_version }} is not an acceptable version of Ubuntu for this role"
+  when: "ansible_distribution_version not in ['14.04', '14.10']"
+
+- name: Add Docker repository key
+  sudo: yes
+  apt_key:
+    id: "{{ apt_key_sig }}"
+    url: "{{ apt_key_url }}"
+    state: present
+
+- name: Add Docker repository and update apt cache
+  sudo: yes
+  apt_repository:
+    repo: "{{ apt_repository }}"
+    update_cache: yes
+    state: present
+
+- name: Install (or update) docker and python packages
+  sudo: yes
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 86400
+  with_items:
+    - lxc-docker
+    - python-dev
+    - python-pip
+
+- name: Upgrade latest pip, setuptools and docker-py with pip
+  sudo: yes
+  pip:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - pip
+    - setuptools
+    - docker-py
+
+- name: Set docker daemon options
+  copy:
+    content: "DOCKER_OPTS=\"{{ docker_opts.rstrip('\n') }}\""
+    dest: /etc/default/docker
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Reload docker
+  when: docker_opts != ""
+
+- name: Create a group for docker_user
+  group:
+    name: "{{ docker_group }}"
+    state: present
+  when: docker_user != "" and docker_group != ""
+
+- name: Let a user run docker without sudo
+  sudo: yes
+  user:
+    name: "{{ docker_user }}"
+    groups: "{{ docker_group }}"
+    state: present
+  when: docker_user != ""
+
+- name: Start docker
+  service:
+    name: docker
+    state: started

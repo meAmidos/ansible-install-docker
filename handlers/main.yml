@@ -1,0 +1,7 @@
+---
+
+- name: Start Docker
+  service: name=docker state=started
+
+- name: Reload docker
+  service: name=docker state=reloaded

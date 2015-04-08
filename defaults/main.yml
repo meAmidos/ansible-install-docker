@@ -1,0 +1,26 @@
+---
+
+# Place to get apt repository key
+apt_key_url: http://get.docker.io/gpg
+# apt repository key signature
+apt_key_sig: A88D21E9
+# Name of the apt repository for docker
+apt_repository: deb http://get.docker.io/ubuntu docker main
+
+# The following help expose a docker port or to add additional options when
+# running docker daemon.  The default is to not use any special options.
+#docker_opts: >
+#  -H unix://
+#  -H tcp://0.0.0.0:2375
+#  --log-level=debug
+docker_opts: ""
+
+# A user who is allowed to run docker without sudo
+docker_user: vagrant
+
+# This is the name that must be used, according to documentation
+# https://docs.docker.com/installation/ubuntulinux/#create-a-docker-group
+docker_group: docker
+
+# In case there are no gathered facts, make an assumption
+ansible_distribution_version: "14.04"
