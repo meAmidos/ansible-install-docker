@@ -6,14 +6,14 @@ It is a role for Ansible that can be used to
 * Configure a non-root user to use docker without sudo.
 * Run docker daemon.
 
-Installation
-------------
+Installation and usage
+----------------------
 
 With ansible galaxy:
 
     ansible-galaxy install amidos.install-docker
 
-And later in a playbook:
+And later in a playbook (user 'vagrant' is just an example):
 
     - hosts: servers
       roles:
@@ -21,6 +21,8 @@ And later in a playbook:
 
 Role Variables
 --------------
+
+All variables are optional.
 
 ### Docker package
 
@@ -33,7 +35,7 @@ You probably wouldn't want to change these
 ### User to use docker without sudo
 
 * ```docker_user```
-* ```docker_group```: This is have to be 'docker'
+* ```docker_group```: This is have to be 'docker'. So, don't change it, unless you know what you are doing.
 
 ### Additional
 
