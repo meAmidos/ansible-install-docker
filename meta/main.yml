@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Dmitry Matrosov
+  description: Install Docker on Ubuntu 14.04 or 14.10
+  license: MIT
+  min_ansible_version: 1.2
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+  categories:
+  - cloud
+  - development
+  - packaging
+  - system
+dependencies: []
