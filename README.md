@@ -35,7 +35,7 @@ You probably wouldn't want to change these
 ### User to use docker without sudo
 
 * ```docker_user```
-* ```docker_group```: This is have to be 'docker'. So, don't change it, unless you know what you are doing.
+* ```docker_group```: It has to be 'docker'. So, don't change it, unless you know what you are doing.
 
 ### Additional
 
