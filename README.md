@@ -12,7 +12,7 @@ Installation and usage
 Install with ansible-galaxy to the default roles location:
 
     ansible-galaxy install amidos.install-docker
-    
+
 ...or to a custom location (subdirectory 'roles' in this example):
 
     ansible-galaxy install amidos.install-docker -p ./roles
@@ -41,6 +41,8 @@ You probably wouldn't want to change these
 * ```docker_user```
 * ```docker_group```: It has to be 'docker'. So, don't change it, unless you know what you are doing.
 
-### Additional
+### Docker configuration
 
-* ```docker_opts```: Parameters for docker daemon
+* ```docker_opts```: Parameters for Docker daemon
+* ```docker_tmpdir```: Path to tmp directory to be used by Docker
+* ```docker_config_file```: Path to Docker config file (default is /etc/default/docker)

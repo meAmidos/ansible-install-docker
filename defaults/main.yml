@@ -16,6 +16,9 @@ docker_package: docker-engine
 #  -H tcp://0.0.0.0:2375
 #  --log-level=debug
 docker_opts: ""
+docker_tmpdir: ""
+
+docker_config_file: /etc/default/docker
 
 # A user who is allowed to run docker without sudo
 docker_user: vagrant

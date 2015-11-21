@@ -37,15 +37,26 @@
     - docker-py
 
 - name: Set docker daemon options
-  copy:
-    content: "DOCKER_OPTS=\"{{ docker_opts.rstrip('\n') }}\""
-    dest: /etc/default/docker
-    owner: root
-    group: root
-    mode: 0644
+  sudo: yes
+  lineinfile:
+    dest: "{{ docker_config_file }}"
+    create: yes
+    line: "DOCKER_OPTS=\"{{ docker_opts.rstrip('\n') }}\""
+    state: present
   notify:
     - Reload docker
   when: docker_opts != ""
+
+- name: Set custom tmp dir for Docker
+  sudo: yes
+  lineinfile:
+    dest: "{{ docker_config_file }}"
+    create: yes
+    line: "export DOCKER_TMPDIR={{ docker_tmpdir }}"
+    state: present
+  notify:
+    - Reload docker
+  when: docker_tmpdir != ""
 
 - name: Create a group for docker_user
   group:
