@@ -23,6 +23,3 @@ docker_user: vagrant
 # This is the name that must be used, according to documentation
 # https://docs.docker.com/installation/ubuntulinux/#create-a-docker-group
 docker_group: docker
-
-# In case there are no gathered facts, make an assumption
-ansible_distribution_version: "14.04"

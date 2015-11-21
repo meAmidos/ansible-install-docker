@@ -1,10 +1,5 @@
 ---
 
-- name: Fail if not a new release of Ubuntu
-  fail:
-    msg: "{{ ansible_distribution_version }} is not an acceptable version of Ubuntu for this role"
-  when: "ansible_distribution_version not in ['14.04', '14.10']"
-
 - name: Add Docker repository key
   sudo: yes
   apt_key:
