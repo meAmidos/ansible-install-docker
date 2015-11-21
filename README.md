@@ -9,9 +9,13 @@ It is a role for Ansible that can be used to
 Installation and usage
 ----------------------
 
-With ansible galaxy:
+Install with ansible-galaxy to the default roles location:
 
     ansible-galaxy install amidos.install-docker
+    
+...or to a custom location (subdirectory 'roles' in this example):
+
+    ansible-galaxy install amidos.install-docker -p ./roles
 
 And later in a playbook (user 'vagrant' is just an example):
 
