@@ -69,6 +69,7 @@
   user:
     name: "{{ docker_user }}"
     groups: "{{ docker_group }}"
+    append: yes
     state: present
   when: docker_user != ""
 
