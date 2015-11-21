@@ -44,7 +44,7 @@
     line: "DOCKER_OPTS=\"{{ docker_opts.rstrip('\n') }}\""
     state: present
   notify:
-    - Reload docker
+    - Restart docker
   when: docker_opts != ""
 
 - name: Set custom tmp dir for Docker
@@ -55,7 +55,7 @@
     line: "export DOCKER_TMPDIR={{ docker_tmpdir }}"
     state: present
   notify:
-    - Reload docker
+    - Restart docker
   when: docker_tmpdir != ""
 
 - name: Create a group for docker_user
@@ -74,6 +74,7 @@
   when: docker_user != ""
 
 - name: Start docker
+  sudo: yes
   service:
     name: docker
     state: started
