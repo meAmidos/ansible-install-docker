@@ -46,3 +46,4 @@ You probably wouldn't want to change these
 * ```docker_opts```: Parameters for Docker daemon
 * ```docker_tmpdir```: Path to tmp directory to be used by Docker
 * ```docker_config_file```: Path to Docker config file (default is /etc/default/docker)
+* ```docker_proxy```: Hostname of an HTTP proxy (default is undefined)

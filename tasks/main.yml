@@ -73,6 +73,32 @@
     state: present
   when: docker_user != ""
 
+- name: Create dir for proxy config
+  file:
+    path: /etc/systemd/system/docker.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  when: docker_proxy is defined
+
+- name: Configure HTTP proxy
+  template:
+    src: http-proxy.conf.j2
+    dest: /etc/systemd/system/docker.service.d/http-proxy.conf
+    owner: root
+    group: root
+    mode: 0644
+  when: docker_proxy is defined
+  register: proxy
+
+- name: Reload systemctl
+  command: systemctl daemon-reload
+  become: yes
+  when: proxy.changed
+  notify:
+    - Restart docker
+
 - name: Start docker
   become: yes
   service:
