@@ -1,6 +1,8 @@
 install-docker
 ==============
 
+Requires Ansible 1.9+
+
 It is a role for Ansible that can be used to
 * Install Docker along with some python tools. These python tools are required for ansible modules 'docker' and 'docker_image'.
 * Configure a non-root user to use docker without sudo.
