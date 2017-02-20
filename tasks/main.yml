@@ -1,21 +1,21 @@
 ---
 
 - name: Add Docker repository key
-  sudo: yes
+  become: yes
   apt_key:
     id: "{{ apt_key_sig }}"
     url: "{{ apt_key_url }}"
     state: present
 
 - name: Add Docker repository and update apt cache
-  sudo: yes
+  become: yes
   apt_repository:
     repo: "{{ apt_repository }}"
     update_cache: yes
     state: present
 
 - name: Install (or update) docker and python packages
-  sudo: yes
+  become: yes
   apt:
     name: "{{ item }}"
     state: latest
@@ -27,7 +27,7 @@
     - python-pip
 
 - name: Upgrade latest pip, setuptools and docker-py with pip
-  sudo: yes
+  become: yes
   pip:
     name: "{{ item }}"
     state: latest
@@ -37,7 +37,7 @@
     - docker-py
 
 - name: Set docker daemon options
-  sudo: yes
+  become: yes
   lineinfile:
     dest: "{{ docker_config_file }}"
     create: yes
@@ -48,7 +48,7 @@
   when: docker_opts != ""
 
 - name: Set custom tmp dir for Docker
-  sudo: yes
+  become: yes
   lineinfile:
     dest: "{{ docker_config_file }}"
     create: yes
@@ -65,7 +65,7 @@
   when: docker_user != "" and docker_group != ""
 
 - name: Let a user run docker without sudo
-  sudo: yes
+  become: yes
   user:
     name: "{{ docker_user }}"
     groups: "{{ docker_group }}"
@@ -74,7 +74,7 @@
   when: docker_user != ""
 
 - name: Start docker
-  sudo: yes
+  become: yes
   service:
     name: docker
     state: started
